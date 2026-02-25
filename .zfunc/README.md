@@ -2,6 +2,8 @@
 
 A comprehensive collection of ZSH functions designed to streamline development workflows, automate routine tasks, and enhance productivity on Arch Linux systems.
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](../LICENSE)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -10,7 +12,6 @@ A comprehensive collection of ZSH functions designed to streamline development w
 - [Functions Reference](#functions-reference)
   - [Media Processing](#media-processing)
     - [fn_optimize_images](#fn_optimize_images)
-    - [fn_youtube_video_translate](#fn_youtube_video_translate)
     - [fn_convert_media](#fn_convert_media)
     - [fn_convert_media_batch](#fn_convert_media_batch)
   - [Development Tools](#development-tools)
@@ -19,14 +20,15 @@ A comprehensive collection of ZSH functions designed to streamline development w
     - [fn_init_repo](#fn_init_repo)
   - [File Generators](#file-generators)
   - [Template Requirements](#template-requirements)
+- [Sponsorship](#sponsorship)
 
 ## Overview
 
 This collection provides custom ZSH functions that automate common development and system administration tasks. Each function is designed to be modular, efficient, and easy to use with sensible defaults.
 
 ### Key Features
-- **Media Processing**: Batch convert, optimize images, download and translate YouTube videos
-- **Development Utilities**: Template-based project scaffolding, Git workflow enhancements
+- **Media Processing**: Batch convert and optimize images, convert media files
+- **Development Utilities**: Template-based project scaffolding, Git workflow enhancements, AI chat
 - **System Integration**: Generate systemd services, timers, and desktop entries
 - **Smart Defaults**: All functions work with minimal configuration while supporting advanced options
 
@@ -34,17 +36,14 @@ This collection provides custom ZSH functions that automate common development a
 
 - `ZSH` 5.0+ - shell environment
 - `git` - version control for Git-related functions
-- `nodejs` & `npm` - required for SVGO and other Node.js based tools
 - `jq` - JSON processor for AI chat functionality
 - `curl` - HTTP client for API communication
 - `ffmpeg` - media conversion and processing
-- `yt-dlp` - YouTube video downloading
-- `vot-cli` - video translation
 - `pngquant` - PNG optimization
 - `jpegoptim` - JPEG optimization
-- `webp` - WebP support (cwebp utility)
+- `webp` - WebP support (`cwebp` utility, package `libwebp-utils`)
 - `imagemagick` - AVIF support
-- `svgo` - SVG optimization (installed via npm)
+- `svgo` - SVG optimization 
 
 ### Optional
 - [Oh-My-ZSH](https://github.com/ohmyzsh/ohmyzsh/) - enhanced shell experience
@@ -124,7 +123,7 @@ Optimizes images in a source directory and saves the results to a target directo
 5. Saves the optimized images to the output folder.
 6. Logs the optimization process and any errors encountered.
 
-**Requires:** `pngquant`, `jpegoptim`, `webp`, `imagemagick`, `svgo` (installed via `npm`)
+**Requires:** `pngquant`, `jpegoptim`, `cwebp`, `imagemagick`, `svgo`
 
 **Supported formats:** png, jpg, jpeg, webp, svg, avif.
 
@@ -134,37 +133,6 @@ When both input and output folders point to the current directory, or when the s
 **Example:**
 ```bash
 fn_optimize_images ~/pictures/raw ~/pictures/optimized
-```
-
-#### fn_youtube_video_translate
-
-Downloads a YouTube video, translates its audio track to Russian using `vot-cli` and Yandex API, and merges the translated audio with the original video using `ffmpeg`. Uses Firefox cookies for `yt-dlp` by default - adjust or remove `--cookies-from-browser firefox` if you use a different browser. The `--concurrent-fragments 24` option in `yt-dlp` enables parallel downloads; reduce this value on low-performance systems.
-
-**Usage:**  
-```bash
-  fn_youtube_video_translate project_name video_url
-```
-
-**Arguments:**
-- `project_name` (required): Name for the project folder and output files
-- `video_url` (required): YouTube video URL
-
-**Behavior:**
-1. Creates project directory: `~/videos/translate/src/<project_name>/`
-2. Uses `vot-cli` to extract and translate audio to MP3 format
-3. Downloads video using `yt-dlp` with best quality MP4 format
-4. Merges original video with translated audio using `ffmpeg`
-5. Outputs final video as: `~/videos/translate/<project_name>_final.mp4`
-6. Warns if project directory already exists and asks for confirmation
-7. Automatically cleans up temporary files if process fails
-
-**Requires:** `vot-cli`, `yt-dlp`, `ffmpeg`
-
-**Note:** Requires hardware acceleration support for optimal performance. The function uses `--hwaccel auto` to automatically detect available acceleration.
-
-**Example:**
-```bash
-fn_youtube_video_translate my_project https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ```
 
 #### fn_convert_media
@@ -381,6 +349,8 @@ fn_init_repo ./projects/my-new-project
     
 This group of functions, prefixed with `fn_new_`, generates configuration and project files from templates.
 
+> **Design note:** Each `fn_new_*` function creates a specific file type. The `fn_new_` prefix is intentional — it enables fast **tab completion** in the shell: type `fn_new_` and press Tab to see all available generators. This approach is more ergonomic than a single monolithic command with subcommands.
+
 **Common Usage Pattern:** `function_name [name] [path]`
   - `name` (optional): The base name for the file (e.g., `my-app`). The file extension is added automatically.
   - `path` (optional): The target directory (defaults to the current directory).
@@ -388,17 +358,14 @@ This group of functions, prefixed with `fn_new_`, generates configuration and pr
 **For files with fixed names (`Dockerfile`, `docker-compose.yaml`, `.gitignore`, `.dockerignore`)**: `function_name [path]`
   - `path` (optional): The target directory where the fixed-name file will be created (defaults to the current directory).
 
-| Function                 | Description                                     | Usage Example                        |
-|--------------------------|-------------------------------------------------|--------------------------------------|
-| `fn_new_Dockerfile`      | Creates a `Dockerfile`.                         | `fn_new_Dockerfile ./project`        |
-| `fn_new_dockerignore`    | Creates a `.dockerignore` file.                 | `fn_new_dockerignore ./project`      |
-| `fn_new_docker_compose`  | Creates a `docker-compose.yaml` file.           | `fn_new_docker_compose ./project`    |
-| `fn_new_gitignore`       | Creates a `.gitignore` file.                    | `fn_new_gitignore ./project`         |
-| `fn_new_desktop_file`    | Creates a `.desktop` entry.                     | `fn_new_desktop_file my-app ./Apps`  |
-| `fn_new_timer`           | Creates a systemd `.timer` unit.                | `fn_new_timer my-task`               |
-| `fn_new_system_service`  | Creates a system-level systemd `.service` unit. | `fn_new_system_service my-daemon`    |
-| `fn_new_user_service`    | Creates a user-level systemd `.service` unit.   | `fn_new_user_service my-agent`       |
-| `fn_new_libreoffice_doc` | Creates a LibreOffice document (`.odt`).        | `fn_new_libreoffice_doc "My Report"` |
+- `fn_new_Dockerfile` - Creates a `Dockerfile`. Example: `fn_new_Dockerfile ./project`
+- `fn_new_dockerignore` - Creates a `.dockerignore` file. Example: `fn_new_dockerignore ./project`
+- `fn_new_docker_compose` - Creates a `docker-compose.yaml` file. Example: `fn_new_docker_compose ./project`
+- `fn_new_gitignore` - Creates a `.gitignore` file. Example: `fn_new_gitignore ./project`
+- `fn_new_desktop_file` - Creates a `.desktop` entry. Example: `fn_new_desktop_file my-app ./Apps`
+- `fn_new_timer` - Creates a systemd `.timer` unit. Example: `fn_new_timer my-task`
+- `fn_new_system_service` - Creates a system-level systemd `.service` unit. Example: `fn_new_system_service my-daemon`
+- `fn_new_user_service` - Creates a user-level systemd `.service` unit. Example: `fn_new_user_service my-agent`
 
 ### Template Requirements
 
@@ -408,4 +375,15 @@ To use these functions:
 1. Copy or create symbolic links from the [templates](../templates) folder of the cloned repository to your local `~/templates/` directory.
 2. Customize templates as needed, functions will use your customized versions
 
-For additional help, please refer to the main [README](../README.md) or [open an issue](https://github.com/theEvilGrinch/ArchLinux-utility-belt/issues).
+## Sponsorship
+
+[![Boosty](https://img.shields.io/badge/Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=white)![Support](https://img.shields.io/badge/Support%20me-grey?style=for-the-badge)](https://boosty.to/andmitr/donate) 
+
+![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=flat&logo=bitcoin&logoColor=white&logoSize=auto) 
+```
+1CCnwAvJYEoDVGM7vsBg2Q99cF9EHtBVaY
+```
+![Tether](https://img.shields.io/badge/Tether%20(USDT%20ETH)-168363?style=flat&logo=tether&logoColor=white&logoSize=auto) 
+```
+0x54f0ccc6b2987de454f69f2814fc9202bcfb74fe
+```

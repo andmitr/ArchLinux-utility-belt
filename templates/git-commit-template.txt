@@ -37,4 +37,4 @@
 #    refactor(Block.ts): update render method (#67)
 #  All commit messages from the merged branch go into the commit body.
 #  To add the template globally:
-#  git config --global commit.template "$HOME/templates/git-commit-template_en.txt"
+#  git config --global commit.template "$HOME/templates/git-commit-template.txt"

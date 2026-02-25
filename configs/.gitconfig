@@ -1,0 +1,16 @@
+# $HOME/.gitconfig
+[user]
+	email = andrew.dmitriev.22@gmail.com
+	name = Andrew Dmitriev
+	signingkey = 7A5382A072CAD060
+[commit]
+	gpgsign = true
+	template = ~/templates/git-commit-template.txt
+[push]
+	followTags = true
+[core]
+	editor = mcedit
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[init]
+	defaultBranch = master

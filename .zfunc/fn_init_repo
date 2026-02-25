@@ -8,7 +8,7 @@ fn_init_repo() {
     "Usage: fn_init_repo [repo_name]"
     ""
     "Initialize a new git repository with template files."
-    "Copies .gitignore and .dockerignore from $template_dir if they exist"
+    "Copies .editorconfig, .gitignore and .dockerignore from $template_dir if they exist"
     ""
     "repo_name (optional): Name for the new repository. May include a path, e.g. ./Path/My-new-repo. If not provided, uses current directory."
   )

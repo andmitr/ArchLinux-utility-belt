@@ -59,10 +59,6 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 coverage/
 .nyc_output/
 *.lcov
-# Environment variables
-.env
-.env.*
-!.env.example
 # TypeScript
 *.tsbuildinfo
 # VSCode
@@ -75,7 +71,6 @@ coverage/
 .ionide/
 # JetBrains IDEs
 .idea/
-*.iml
 *.ipr
 iws
 *.iws
@@ -584,10 +579,20 @@ FodyWeavers.xsd
 .windsurfrules
 .lingma/
 .windsurf/
-.github/
 GEMINI.md
 # Other
 .tern-port
 .dynamodb/
 ###
 tmp/
+.git/
+.gitignore
+.dockerignore
+Dockerfile*
+README.md
+LICENSE
+docs/
+.github/
+todo.md
+todo.txt
+todo/

@@ -1,22 +1,15 @@
 # ArchLinux Utility Belt
 
-![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)
-
-[![Support me on Boosty](https://img.shields.io/badge/Boosty-Support%20me-%23f15f2c?style=for-the-badge)](https://boosty.to/theEvilGrinch/donate)
-[![Donate via card](https://img.shields.io/badge/Donate-%23702ff4?style=for-the-badge)](https://yoomoney.ru/to/410016288289737)
-
-## Overview
-
 A comprehensive collection of configurations, utilities, and automation scripts for Arch Linux power users. This repository provides a curated set of tools and settings to transform a fresh Arch installation into a highly optimized development environment.
 
-### Key Benefits
-- **Custom ZSH functions** for development automation
-- **Performance-tuned configurations** for linux-zen kernel, Nvidia GPU, and Btrfs filesystem
-- **Production-ready templates** for Docker, systemd, and more
-- **Modular design** - use only what you need
+
+![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](LICENSE)
+
+> **⚠️ v2.0.0 Released — Breaking Changes**
+>
+> This release includes significant breaking changes: removed configurations, renamed aliases, and deleted functions.
+> See the [release notes](https://github.com/andmitr/ArchLinux-utility-belt/releases) and [CHANGELOG](CHANGELOG.md) for full details.
 
 ## Table of Contents
 
@@ -27,8 +20,19 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 - [Repository Structure](#repository-structure)
 - [Usage](#usage)
 - [Documentation](#documentation)
-- [Contributing](#contributing)
+- [Sponsorship](#sponsorship)
 - [License](#license)
+
+## Overview
+
+A comprehensive collection of configurations, utilities, and automation scripts for Arch Linux power users. This repository provides a curated set of tools and settings to transform a fresh Arch installation into a highly optimized development environment.
+
+### Key Benefits
+- **Custom ZSH functions** for development automation
+- **Performance-tuned configurations** for linux-zen kernel, Nvidia GPU, and Btrfs filesystem
+- **Production-ready templates** for Docker, systemd, and more
+- **Legacy Nvidia drivers** for GPUs no longer supported by official packages
+- **Modular design** — use only what you need
 
 ## Disclaimer
 
@@ -41,13 +45,13 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 
 ### System Optimization
 - **Kernel Performance**: Custom parameters for linux-zen kernel with Btrfs-specific optimizations
-- **Memory Management**: Configured systemd-oomd for intelligent out-of-memory handling
+- **GPU Support**: Nvidia driver configurations and legacy driver packages for older GPUs
 - **Build System**: Optimized makepkg configuration for faster AUR builds
 
 ### Development Productivity
-- **Git Workflow**: Enhanced git plugin
-- **Media Processing**: Batch convert, optimize, and translate video/audio files
+- **Media Processing**: Batch convert and optimize images and media files
 - **Template Generation**: Instantly scaffold Docker, systemd, and project files
+- **AI Integration**: Interactive AI chat via OpenRouter API
 
 ### Modular Architecture
 - **Selective Installation**: Each component can be used independently
@@ -58,8 +62,7 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 
 - Arch Linux (or Arch-based distribution)
 - ZSH shell with Oh-My-ZSH framework
-- Git version 2.0+
-- Node and npm
+- Git 2.0+
 
 Additional dependencies may be required for specific modules. Please refer to individual README files in each directory for detailed requirements.
 
@@ -70,48 +73,46 @@ ArchLinux-utility-belt/
 ├── configs/                        # System and application configurations
 │   ├── 20-intel.conf               # Xorg Intel GPU configuration
 │   ├── 99-custom.conf              # Kernel parameters optimization
+│   ├── .gitconfig                  # Git configuration (GPG, SSH, commit template)
 │   ├── .makepkg.conf               # Build system configuration
-│   ├── .oomd.conf                  # Systemd-oomd memory management
 │   ├── grub                        # GRUB bootloader configuration
-│   ├── .htaccess                   # Apache security hardening
-│   ├── .npmrc                      # NPM global settings
-│   ├── .zshrc                      # Main ZSH configuration
-│   ├── .zshrc_default              # Default Oh-My-ZSH config
 │   ├── mkinitcpio.conf             # Initramfs generation (Nvidia/Btrfs)
-│   ├── web-search.plugin.zsh       # Terminal web search integration
-│   └── git.plugin.zsh              # Enhanced git functionality
-├── fonts/                          # Curated programming fonts (TTF)
-│   └── [various font files]        # FiraCode, MartianMono, OpenSans, etc.
+│   ├── .xinitrc                    # X session startup (XFCE4)
+│   ├── .zshrc                      # Main ZSH configuration
+│   └── .zshrc_default              # Default Oh-My-ZSH config
+├── custompkgs/                     # Local package archive
+│   ├── nvidia-dkms-580.95.05-1-x86_64.pkg.tar.zst
+│   └── nvidia-utils-580.95.05-1-x86_64.pkg.tar.zst
+├── fonts/                          # Curated programming fonts
+│   └── [various font files]        # FiraCode, JetBrains Mono NF, MartianMono, OpenSans, SF Pro
 ├── .zfunc/                         # Custom ZSH functions library
-│   ├── fn_youtube_video_translate  # YouTube video translation
-│   ├── fn_optimize_images          # Batch image optimization
+│   ├── fn_ask_ai                   # Interactive AI chat via OpenRouter API
 │   ├── fn_convert_media            # Media format conversion
 │   ├── fn_convert_media_batch      # Bulk media conversion
 │   ├── fn_git_clone_template       # Clone without git history
-│   ├── fn_ask_ai                   # Interactive AI chat via OpenRouter API
 │   ├── fn_init_repo                # Initialize git repository with basic files
-│   ├── fn_new_gitignore            # Generate .gitignore from template
-│   ├── fn_new_libreoffice_doc      # Create formatted LibreOffice document
+│   ├── fn_optimize_images          # Batch image optimization
 │   ├── fn_new_Dockerfile           # Generate Dockerfile template
 │   ├── fn_new_docker_compose       # Generate docker-compose.yaml
 │   ├── fn_new_dockerignore         # Generate .dockerignore
+│   ├── fn_new_gitignore            # Generate .gitignore from template
 │   ├── fn_new_desktop_file         # Create desktop entry
 │   ├── fn_new_timer                # Generate systemd timer
 │   ├── fn_new_system_service       # Generate system service
 │   └── fn_new_user_service         # Generate user service
 ├── templates/                      # Production-ready file templates
-│   ├── Dockerfile                  # Node.js Alpine template
-│   ├── docker-compose.yaml         # Multi-container setup
-│   ├── .editorconfig               # Code formatting configuration
 │   ├── .dockerignore               # Docker ignore patterns
+│   ├── .editorconfig               # Code formatting configuration
+│   ├── .gitignore                  # Comprehensive ignore patterns
 │   ├── desktop-file.desktop        # Application launcher template
+│   ├── docker-compose.yaml         # Multi-container setup
+│   ├── Dockerfile                  # Node.js Alpine template
 │   ├── example-system.service      # System service template
 │   ├── example-user.service        # User service template
 │   ├── example-timer.timer         # Systemd timer template
-│   ├── git-commit-template_ru.txt  # Commit template (Russian)
-│   ├── git-commit-template_en.txt  # Commit template (English)
-│   ├── .gitignore                  # Comprehensive ignore patterns
-│   └── libreoffice.ott             # Document template
+│   ├── git-commit-template.txt     # Conventional commit template
+│   └── Makefile_go                 # Go project Makefile template
+├── CHANGELOG.md                    # Version history
 ├── LICENSE                         # MIT License
 └── README.md                       # Project documentation
 ```
@@ -122,7 +123,7 @@ ArchLinux-utility-belt/
 
 Clone the repository:
 ```bash
-git clone https://github.com/theEvilGrinch/ArchLinux-utility-belt.git
+git clone https://github.com/andmitr/ArchLinux-utility-belt.git
 cd ArchLinux-utility-belt
 ```
 
@@ -152,9 +153,9 @@ exec zsh
 
 ### Important Notes
 
-- Git commit templates (`git-commit-template_*.txt`) must be referenced by their full path in git configuration rather than using symbolic links:
+- Git commit templates (`git-commit-template.txt`) must be referenced by their full path in git configuration rather than using symbolic links:
   ```bash
-  git config --global commit.template /path/to/ArchLinux-utility-belt/templates/git-commit-template_en.txt
+  git config --global commit.template /path/to/ArchLinux-utility-belt/templates/git-commit-template.txt
   ```
 - Each configuration file contains a header comment specifying its target location in the system
 - Some configurations may require additional setup steps - refer to module-specific documentation
@@ -168,15 +169,25 @@ Each module in this repository has its own comprehensive README with:
 - Troubleshooting guides
 
 ### Module documentation:
-- [`configs/README.md`](configs/README.md) - System and application configuration details
-- [`fonts/README.md`](fonts/README.md) - Font installation and usage guide
-- [`templates/README.md`](templates/README.md) - Template file documentation
-- [`.zfunc/README.md`](.zfunc/README.md) - ZSH function reference and examples
+- [`configs/README.md`](configs/README.md) — System and application configuration details
+- [`custompkgs/README.md`](custompkgs/README.md) — Legacy Nvidia driver and other packages
+- [`fonts/README.md`](fonts/README.md) — Font installation and usage guide
+- [`templates/README.md`](templates/README.md) — Template file documentation
+- [`.zfunc/README.md`](.zfunc/README.md) — ZSH function reference and examples
 
-## Contributing
+## Sponsorship
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+[![Boosty](https://img.shields.io/badge/Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=white)![Support](https://img.shields.io/badge/Support%20me-grey?style=for-the-badge)](https://boosty.to/andmitr/donate) 
+
+![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=flat&logo=bitcoin&logoColor=white&logoSize=auto) 
+```
+1CCnwAvJYEoDVGM7vsBg2Q99cF9EHtBVaY
+```
+![Tether](https://img.shields.io/badge/Tether%20(USDT%20ETH)-168363?style=flat&logo=tether&logoColor=white&logoSize=auto) 
+```
+0x54f0ccc6b2987de454f69f2814fc9202bcfb74fe
+```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT Licensed. See [LICENSE](LICENSE) for details.

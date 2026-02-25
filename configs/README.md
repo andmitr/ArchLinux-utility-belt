@@ -1,46 +1,55 @@
 # Arch Linux Configuration Files
-
+ 
 This directory contains configuration files for system components and applications tailored to an Arch Linux environment. These files are designed for my workflow but can be adapted to other setups with appropriate modifications.
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](../LICENSE)
 
 ## Table of Contents
 - [Configuration Files](#configuration-files)
   - [Shell Configuration](#shell-configuration)
+  - [Git Configuration](#git-configuration)
   - [Build Configuration](#build-configuration)
-  - [NPM Configuration](#npm-configuration)
   - [System Configuration](#system-configuration)
   - [Boot Loader Configuration](#boot-loader-configuration)
-  - [Custom Oh My ZSH Plugins](#custom-oh-my-zsh-plugins)
-    - [Web Search Plugin](#web-search-plugin)
-    - [Git Plugin](#git-plugin)
-  - [Apache Configuration](#apache-configuration)
+  - [X Session Configuration](#x-session-configuration)
 - [Notes](#notes)
+- [Sponsorship](#sponsorship)
 
 ## Configuration Files
 
 ### Shell Configuration
 `.zshrc`: ZSH shell configuration with the following features:
-  - Oh-My-ZSH framework with the "jonathan" theme
-  - Comprehensive `PATH` setup for development tools
+  - Oh-My-ZSH framework with the `agnoster` theme
+  - `zeditor --wait` as the default visual editor, `mcedit` as the fallback editor
+  - Comprehensive `PATH` setup for development tools (Go, Java, local bin)
   - **Environment variables are externalized**:  
     - General environment variables (e.g., paths) are stored in `.env`
-    - Sensitive or private variables (e.g., tokens, API keys) are stored in `.env_priv`
-    - Both files are sourced at the start of `.zshrc` for environment initialization
-  - System maintenance aliases (e.g., updates, cache cleanup)
-  - Package management shortcuts for pacman and yay
-  - Custom utilities for network testing, disk space checks, and file management
-  - Advanced completion settings, improved history behavior, and enhanced key bindings
+    - Sourced at the start of `.zshrc` for environment initialization
+  - Package management aliases for `pacman`
+  - VPN management aliases via NetworkManager/WireGuard (`vpn_add`, `vpn_del`, `vpn_on`, `vpn_off`, `vpn_show`)
+  - Golang development aliases (`gr`, `gb`, `gbp`, `gmi`)
+  - Git aliases with automatic tag pushing
+  - Docker and NPM shortcuts
+  - Advanced completion settings and custom function autoloading
 
 > **Note:**  
-> `.env` and `.env_priv` files must exist in the configuration directory.  
-> If you do not use these files, remove or comment out the corresponding lines in `.zshrc` to avoid errors:
+> The `.env` file must exist in your home directory.  
+> If you do not use this file, remove or comment out the corresponding lines in `.zshrc` to avoid errors:
 ```bash
   set -a
   source $HOME/.env
-  source $HOME/.env_priv
   set +a
 ```
 
 `.zshrc_default`: A default ZSH configuration with Oh-My-ZSH, provided as a baseline or fallback option.
+
+### Git Configuration
+`.gitconfig`: Git configuration with the following features:
+  - GPG commit signing
+  - Conventional commit template (`~/templates/git-commit-template.txt`)
+  - Automatic annotated tag pushing on `git push`
+  - SSH URL rewriting for GitHub (`git@github.com:` instead of `https://github.com/`)
+  - Default branch set to `master`
 
 ### Build Configuration
 `.makepkg.conf`: Optimized build settings for Arch Linux:
@@ -49,67 +58,53 @@ This directory contains configuration files for system components and applicatio
   - Security features (`-fstack-clash-protection`, `-fcf-protection`)
   - Parallel compilation using all available CPU cores
 
-### NPM Configuration
-`.npmrc`: Global NPM settings:
-  - Exact version saving for packages
-  - Custom directory for global package installations
-
 ### System Configuration
 `99-custom.conf`: Sysctl settings for security and responsiveness:
   - SYN flood protection and ICMP redirect prevention
-  - Reduced swap usage and optimized disk write behavior
+  - Reduced swap usage (`vm.swappiness = 10`)
   - Address Space Layout Randomization (ASLR) and kernel pointer hiding
-  - Network performance tweaks (e.g., TIME_WAIT socket reuse, fq_codel)  
+  - Network performance tweaks (e.g., TIME_WAIT socket reuse, fq_codel)
 
-`oomd.conf`: systemd-oomd configuration for out-of-memory management:
-  - Limits swap usage and memory pressure
-  - Customizes OOM handling thresholds and durations  
-
-`20-intel.conf`: Xorg configuration for Intel integrated GPUs:
+`20-intel.conf`
   - Enables DRI3 and SNA acceleration
   - Optional settings for tear-free rendering (commented by default)  
 
 `mkinitcpio.conf`: Initramfs generation configuration:
-  - Tailored for Nvidia GPU (modules: `nvidia`, `nvidia_modeset`, `nvidia_uvm`, `nvidia_drm`)
-  - Optimized for the linux-zen kernel and Btrfs filesystem
+  - Tailored for Nvidia GPU (modules: `nvidia`, `nvidia_modeset`, `nvidia_uvm`, `nvidia_drm`) and Btrfs (`btrfs`)
+  - Optimized for the linux-zen kernel
   - Uses `lz4` compression (level `-6`) for fast boot times
   - `MODULES_DECOMPRESS="no"` to minimize early boot memory usage
   - **Note**: Adjust `MODULES` and `HOOKS` for your hardware and filesystem (e.g., Intel GPU, ext4, or encryption)
 
 ### Boot Loader Configuration
 `grub`: GRUB boot loader configuration:
-  - Custom kernel parameters for performance and hardware compatibility
+  - Simplified kernel parameters (`loglevel=3`)
   - Timeout and menu style settings
-  - Custom theme and resolution
+  - GRUB theme: `arch-silence-grub-theme-git` (install from AUR)
+  - Resolution: `1920x1080` — change to `auto` or your supported resolution if needed
   - Disables recovery mode entries
   - Example settings for encrypted disks and OS probing
-  - **Theme customization**: For a custom GRUB theme, you can install the `grub2-theme-archlinux` package from the AUR and set the path to the theme in the `GRUB_THEME` variable.
 
-### Custom Oh My ZSH Plugins
-
-#### Web Search Plugin
-`web-search.plugin.zsh`: Custom Oh-My-ZSH plugin for terminal-based web searches:
-  - Supports search engines (Google, DuckDuckGo, etc.), AI interfaces (ChatGPT, Perplexity), and Yandex Translate
-  - Opens the default browser with the query
-
-#### Git Plugin
-`git.plugin.zsh`: Custom Oh-My-ZSH plugin for advanced Git workflows:
-  - Extended aliases and functions for branch, commit, merge, and ref management
-  - Simplified commands for pull/push, rebase, stash, log, and other operations
-  - Automatic detection of the main branch (`main`, `master`, etc.)
-  - Integration with autocompletion and support for user-defined scenarios
-
-### Apache Configuration
-`.htaccess`: Comprehensive Apache server configuration:
-  - Security headers and rules (CSP, HSTS, X-Frame-Options)
-  - Performance optimization through caching and compression
-  - HTTPS and www/non-www redirects
-  - MIME type definitions and file access controls
-  - Customized error document handling
+### X Session Configuration
+`.xinitrc`: X session startup script:
+  - Launches XFCE4 desktop environment via `startxfce4`
 
 ## Notes
 These configurations are tailored to my workflow but can be adapted with care.
 - **Backup First**: Always back up existing configurations before replacing them.
 - **Path Guidance**: Each file includes a header comment indicating its target location.
-- **Hardware Specificity**: Configurations target an Nvidia GPU, linux-zen kernel, and Btrfs filesystem, with optional Intel GPU support via `configs/20-intel.conf`.
+- **Hardware Specificity**: Configurations target an Nvidia GPU, linux-zen kernel, and Btrfs filesystem, with optional Intel GPU support via `20-intel.conf`.
 - **Sudo Dependency**: Many utilities require sudo privileges for full functionality.
+
+## Sponsorship
+
+[![Boosty](https://img.shields.io/badge/Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=white)![Support](https://img.shields.io/badge/Support%20me-grey?style=for-the-badge)](https://boosty.to/andmitr/donate) 
+
+![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=flat&logo=bitcoin&logoColor=white&logoSize=auto) 
+```
+1CCnwAvJYEoDVGM7vsBg2Q99cF9EHtBVaY
+```
+![Tether](https://img.shields.io/badge/Tether%20(USDT%20ETH)-168363?style=flat&logo=tether&logoColor=white&logoSize=auto) 
+```
+0x54f0ccc6b2987de454f69f2814fc9202bcfb74fe
+```

@@ -6,8 +6,8 @@ GRUB_TIMEOUT=3
 GRUB_DISTRIBUTOR="Andrew Dmitriev"
 
 #GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
-GRUB_CMDLINE_LINUX_DEFAULT="drm.modeset=1 nvidia-drm.fbdev=1 lpj=2893309 mitigations=off nowatchdog page_alloc.shuffle=1 pci=pcie_bus_perf intel_idle.max_cstate=1 libahci.ignore_sss=1 noautogroup"
-
+#GRUB_CMDLINE_LINUX_DEFAULT="drm.modeset=1 nvidia-drm.fbdev=1 lpj=2893309 mitigations=off nowatchdog page_alloc.shuffle=1 pci=pcie_bus_perf intel_idle.max_cstate=1 libahci.ignore_sss=1 noautogroup"
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"
 GRUB_CMDLINE_LINUX=""
 
 # Preload both GPT and MBR modules so that they are not missed
@@ -30,7 +30,7 @@ GRUB_TERMINAL_INPUT=console
 # note that you can use only modes which your graphic card supports via VBE
 # you can see them in real GRUB with the command 'videoinfo'
 #GRUB_GFXMODE=auto
-GRUB_GFXMODE=1024x768
+GRUB_GFXMODE=1920x1080
 # Uncomment to allow the kernel use the same resolution used by grub
 GRUB_GFXPAYLOAD_LINUX=keep
 
@@ -51,8 +51,9 @@ GRUB_DISABLE_RECOVERY=true
 
 
 #GRUB_THEME="/path/to/gfxtheme"
-GRUB_THEME="/boot/grub/themes/Archlinux/theme.txt"
-
+#GRUB_THEME="/boot/grub/themes/Archlinux/theme.txt"
+# For arch-silence-grub-theme-git from AUR
+GRUB_THEME="/boot/grub/themes/arch-silence/theme.txt"
 
 # Uncomment to get a beep at GRUB start
 #GRUB_INIT_TUNE="480 440 1"

@@ -2,6 +2,8 @@
 
 A comprehensive collection of template files for system configurations and development workflows on Arch Linux.
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](../LICENSE)
+
 ## Table of Contents
 
 - [System Configuration](#system-configuration)
@@ -9,8 +11,8 @@ A comprehensive collection of template files for system configurations and devel
   - [Git](#git)
   - [Docker](#docker)
   - [Code Formatting](#code-formatting)
-- [Office Documents](#office-documents)
 - [Automation](#automation)
+- [Sponsorship](#sponsorship)
 
 ## System Configuration
 
@@ -30,18 +32,12 @@ A comprehensive collection of template files for system configurations and devel
 - Includes specific rules for Node.js, React, React Native, Angular, Go, and more
 - Handles OS-specific files (macOS, Linux, Windows)
 
-`git-commit-template_en.txt` - Structured git commit message template with English annotations
+`git-commit-template.txt` - Structured git commit message template with English annotations
 
 - Enforces consistent commit message format
 - Includes type, scope, and description sections
 - Contains guidelines for writing clear commit messages
-- Can be set as default template: `git config --global commit.template "$HOME/templates/git-commit-template_en.txt"`
-
-`git-commit-template_ru.txt` - Structured git commit message template with Russian annotations
-
-- Same structure and features as an English version
-- Includes Russian comments and guidelines
-- Can be set as default template: `git config --global commit.template "$HOME/templates/git-commit-template_ru.txt"`
+- Can be set as default template: `git config --global commit.template "$HOME/templates/git-commit-template.txt"`
 
 ### Docker
 
@@ -83,14 +79,19 @@ A comprehensive collection of template files for system configurations and devel
 - Includes special rules for Markdown files
 - Ensures consistent formatting across development teams
 
-## Office Documents
-
-`libreoffice.ott` - LibreOffice text document template
-
-- Pre-configured styles and formatting
-- Ready-to-use document structure
-- Consistent typography settings
-
 ## Automation
 
 Template-based file generation is automated through Zsh functions available in the [`.zfunc`](../.zfunc) directory. These functions streamline creating new files from the templates in this repository.
+
+## Sponsorship
+
+[![Boosty](https://img.shields.io/badge/Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=white)![Support](https://img.shields.io/badge/Support%20me-grey?style=for-the-badge)](https://boosty.to/andmitr/donate) 
+
+![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=flat&logo=bitcoin&logoColor=white&logoSize=auto) 
+```
+1CCnwAvJYEoDVGM7vsBg2Q99cF9EHtBVaY
+```
+![Tether](https://img.shields.io/badge/Tether%20(USDT%20ETH)-168363?style=flat&logo=tether&logoColor=white&logoSize=auto) 
+```
+0x54f0ccc6b2987de454f69f2814fc9202bcfb74fe
+```

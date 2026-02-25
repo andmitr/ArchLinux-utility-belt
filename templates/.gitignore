@@ -34,6 +34,7 @@ node_modules/
 # Build directories
 /dist
 /build
+bin/
 /out
 .next/
 .nuxt/
@@ -585,20 +586,20 @@ FodyWeavers.xsd
 .lingma/
 .windsurf/
 GEMINI.md
-.github/
+QWEN.md
+AGENTS.md
 # Other
 .tern-port
 .dynamodb/
 ###
 tmp/
+tmp.*
 ###
 *.avi
-*.mp4
 *.3g2
 *.3gp
 *.asf
 *.asx
-*.avi
 *.flv
 *.m4v
 *.mov
@@ -620,3 +621,7 @@ tmp/
 *.ogg
 *.wav
 *.wma
+todo
+todo.md
+testfile*
+notes.md

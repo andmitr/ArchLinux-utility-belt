@@ -1,6 +1,8 @@
 # TrueType Fonts Collection
 
-This directory contains a curated set of TrueType fonts (TTF) intended for use in Arch Linux environments. The collection includes FiraCode, MartianMono, OpenSans, and San Francisco Pro fonts.
+This directory contains a curated set of TrueType fonts (TTF/OTF) intended for use in Arch Linux environments. The collection includes FiraCode, JetBrains Mono NerdFont Mono, MartianMono, OpenSans, and San Francisco Pro fonts.
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](../LICENSE)
 
 ## Installation
 
@@ -36,5 +38,18 @@ fc-cache -f -v
 ## Verification
 To verify that the fonts have been installed correctly, you can list fonts using:
 ```zsh
-fc-list | grep -i "FiraCode\|MartianMono\|OpenSans\|SF-Pro-Display\|sft"
+fc-list | grep -i "FiraCode\|JetBrainsMono\|MartianMono\|OpenSans\|SF-Pro-Display\|sft"
+```
+
+## Sponsorship 
+
+[![Boosty](https://img.shields.io/badge/Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=white)![Support](https://img.shields.io/badge/Support%20me-grey?style=for-the-badge)](https://boosty.to/andmitr/donate) 
+
+![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=flat&logo=bitcoin&logoColor=white&logoSize=auto) 
+```
+1CCnwAvJYEoDVGM7vsBg2Q99cF9EHtBVaY
+```
+![Tether](https://img.shields.io/badge/Tether%20(USDT%20ETH)-168363?style=flat&logo=tether&logoColor=white&logoSize=auto) 
+```
+0x54f0ccc6b2987de454f69f2814fc9202bcfb74fe
 ```
