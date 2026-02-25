@@ -47,9 +47,4 @@
 - **templates**: `git-commit-template_ru.txt` - consolidated into a single English template
 - **templates**: `libreoffice.ott` - LibreOffice document template removed
 
-## [1.0.0] - 2024-11-15
-
-Initial release.
-
 [2.0.0]: https://github.com/andmitr/ArchLinux-utility-belt/releases/tag/v2.0.0
-[1.0.0]: https://github.com/andmitr/ArchLinux-utility-belt/releases/tag/v1.0.0

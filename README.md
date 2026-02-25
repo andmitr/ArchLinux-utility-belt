@@ -6,14 +6,13 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 ![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](LICENSE)
 
-> **⚠️ v2.0.0 Released — Breaking Changes**
+> **⚠️ v2.0.0 Released - Breaking Changes**
 >
 > This release includes significant breaking changes: removed configurations, renamed aliases, and deleted functions.
 > See the [release notes](https://github.com/andmitr/ArchLinux-utility-belt/releases) and [CHANGELOG](CHANGELOG.md) for full details.
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Disclaimer](#disclaimer)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
@@ -22,17 +21,6 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 - [Documentation](#documentation)
 - [Sponsorship](#sponsorship)
 - [License](#license)
-
-## Overview
-
-A comprehensive collection of configurations, utilities, and automation scripts for Arch Linux power users. This repository provides a curated set of tools and settings to transform a fresh Arch installation into a highly optimized development environment.
-
-### Key Benefits
-- **Custom ZSH functions** for development automation
-- **Performance-tuned configurations** for linux-zen kernel, Nvidia GPU, and Btrfs filesystem
-- **Production-ready templates** for Docker, systemd, and more
-- **Legacy Nvidia drivers** for GPUs no longer supported by official packages
-- **Modular design** — use only what you need
 
 ## Disclaimer
 
@@ -47,13 +35,17 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 - **Kernel Performance**: Custom parameters for linux-zen kernel with Btrfs-specific optimizations
 - **GPU Support**: Nvidia driver configurations and legacy driver packages for older GPUs
 - **Build System**: Optimized makepkg configuration for faster AUR builds
+- **Performance-tuned configurations**: for linux-zen kernel, Nvidia GPU, and Btrfs filesystem
+- **Production-ready templates**: Docker, systemd, git, and more
 
 ### Development Productivity
+- **Custom ZSH functions for Development Automation** 
 - **Media Processing**: Batch convert and optimize images and media files
 - **Template Generation**: Instantly scaffold Docker, systemd, and project files
 - **AI Integration**: Interactive AI chat via OpenRouter API
 
 ### Modular Architecture
+- **Modular design**: use only what you need
 - **Selective Installation**: Each component can be used independently
 - **Clear Documentation**: Every module includes its own detailed README
 - **Flexible Configuration**: Adapt configurations to your specific needs
