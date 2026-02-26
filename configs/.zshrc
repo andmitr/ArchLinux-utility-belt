@@ -82,6 +82,7 @@ alias vpn_show="nmcli connection show"
 
 #Git
 alias gcp="git add . && git commit && git push && git push --tags"
+alias glp="git log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit" # git log pretty
 alias gl="git log"
 alias gp="git push && git push --tags"
 alias gaa="git add --all"
