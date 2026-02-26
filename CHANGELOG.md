@@ -1,14 +1,9 @@
 # Changelog
 
-## [2.1.0] - 2026-02-26
+## [2.1.1] - 2026-02-26
 
-### Added
+### Fixed
 
-- **configs/.zshrc**: `glp` alias - pretty git log with colored graph output
-- **.zfunc**: `fn_release` - automate git release workflow (commit, tag, push)
+- **.zfunc/fn_release**: Use `return 1` instead of `exit 1` for proper function status handling in zsh
 
-### Changed
-
-- **README.md**: Reorganized documentation structure
-
-[2.1.0]: https://github.com/andmitr/ArchLinux-utility-belt/releases/tag/v2.1.0
+[2.1.1]: https://github.com/andmitr/ArchLinux-utility-belt/releases/tag/v2.1.1

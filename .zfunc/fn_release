@@ -12,7 +12,7 @@ read "answer?Create release[y/n]?: "
 if [ "$answer" = "y" ]; then
   git push && git push origin v${1}
 else
-    exit 1
+    return 1
 fi
 
 echo "Success"
