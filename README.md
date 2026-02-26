@@ -6,10 +6,10 @@ A comprehensive collection of configurations, utilities, and automation scripts 
 ![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](LICENSE)
 
-> **⚠️ v2.0.0 Released - Breaking Changes**
+> **⚠️ v2.0.0 - 2026-02-25 Released - Breaking Changes**
 >
 > This release includes significant breaking changes: removed configurations, renamed aliases, and deleted functions.
-> See the [release notes](https://github.com/andmitr/ArchLinux-utility-belt/releases) and [CHANGELOG](CHANGELOG.md) for full details.
+> See the [release notes](https://github.com/andmitr/ArchLinux-utility-belt/releases/tag/v2.0.0) for full details.
 
 ## Table of Contents
 
