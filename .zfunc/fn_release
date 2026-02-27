@@ -2,7 +2,7 @@
 # $HOME/.zfunc
 if [ -z "$1" ]; then
   echo "Error: insert version (e.g. 1.2.3)"
-  exit 1
+  return 1
 fi
 git add . && \
 git commit && \
