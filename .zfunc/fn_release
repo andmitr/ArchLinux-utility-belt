@@ -2,17 +2,23 @@
 # $HOME/.zfunc
 if [ -z "$1" ]; then
   echo "Error: insert version (e.g. 1.2.3)"
-  exit 1
+  return 1
 fi
-git add . && \
-git commit && \
-git tag v${1} && \
-git log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit && \
-read "answer?Create release[y/n]?: "
+
+git add . || return 1
+git commit || return 1
+git tag "v${1}" || return 1
+
+git log --all --color --graph \
+  --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)' \
+  --abbrev-commit
+
+read "answer?Create release [y/n]?: "
 if [ "$answer" = "y" ]; then
-  git push && git push origin v${1}
+  git push || return 1
+  git push origin "v${1}" || return 1
 else
-    return 1
+  return 1
 fi
 
 echo "Success"
