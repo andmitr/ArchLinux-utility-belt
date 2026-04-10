@@ -5,11 +5,6 @@ legacy software that is still required for specific hardware or workflow needs.
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&logo=opensource)](../LICENSE)
 
-## Table of Contents
-
-- [Legacy NVIDIA Drivers](#legacy-nvidia-drivers)
-- [Sponsorship](#sponsorship)
-
 ## Legacy NVIDIA Drivers
 
 ### Problem
@@ -28,38 +23,25 @@ The packages stored here represent the **last proprietary driver release** that 
 
 ### Installation
 
-**Option 1.** Install from local files:
-
-```bash
-sudo pacman -U nvidia-dkms-580.95.05-1-x86_64.pkg.tar.zst \
-               nvidia-utils-580.95.05-1-x86_64.pkg.tar.zst
-```
-
-**Option 2.** Install from Arch Linux Archive (if still available):
+**Option 1.** Install from Arch Linux Archive (if still available):
 
 ```bash
 sudo pacman -U \
   https://archive.archlinux.org/packages/n/nvidia-dkms/nvidia-dkms-580.95.05-1-x86_64.pkg.tar.zst \
   https://archive.archlinux.org/packages/n/nvidia-utils/nvidia-utils-580.95.05-1-x86_64.pkg.tar.zst
 ```
+
+**Option 2.** Install from local files:
+
+1. Download the packages from [Google Drive shared folder](https://drive.google.com/drive/folders/1nVmJgWJy8OZRborpA-uUspLDrZ4ms-Od?usp=sharing)
+2. Install the downloaded packages
+
+```bash
+sudo pacman -U nvidia-dkms-580.95.05-1-x86_64.pkg.tar.zst \
+               nvidia-utils-580.95.05-1-x86_64.pkg.tar.zst
+```
 **IMPORTANT** </br>
 After installation, add nvidia-dkms and nvidia-utils to the IgnorePkg list in `/etc/pacman.conf` to prevent accidental upgrades:
 ```text
 IgnorePkg = nvidia-dkms nvidia-utils
-```
-
-## Sponsorship
-
-[![Boosty](https://img.shields.io/badge/Boosty-F15F2C?style=for-the-badge&logo=boosty&logoColor=white)![Support](https://img.shields.io/badge/Support%20me-grey?style=for-the-badge)](https://boosty.to/andmitr/donate)
-
-![Bitcoin](https://img.shields.io/badge/Bitcoin-F7931A?style=flat&logo=bitcoin&logoColor=white&logoSize=auto)
-
-```
-1CCnwAvJYEoDVGM7vsBg2Q99cF9EHtBVaY
-```
-
-![Tether](https://img.shields.io/badge/Tether%20(USDT%20ETH)-168363?style=flat&logo=tether&logoColor=white&logoSize=auto)
-
-```
-0x54f0ccc6b2987de454f69f2814fc9202bcfb74fe
 ```
